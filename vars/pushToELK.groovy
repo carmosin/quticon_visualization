@@ -40,7 +40,7 @@ def call(def url, def index, def buildDataEntryList, def proxy_protocol=null, de
   }
   echo "Posting data to ${url}"
   for (BuildDataEntry entry: buildDataEntryList) {
-    def data = """{"verdict": "${entry.verdict}", "duration": ${entry.duration}, "timestamp": ${entry.timestamp}, "time_in_queue": ${entry.time_in_queue}}"""
+    def data = """{"verdict": "${entry.verdict}", "duration": ${entry.duration}, "build_number": ${entry.build_number}, "timestamp": ${entry.timestamp}, "time_in_queue": ${entry.time_in_queue}}"""
     // We are using job name as a type in Elastic Search and need to do a little bit sanitanization firts
     def type = entry.job_name.replaceAll(" ", "-").toLowerCase()
     def uriPath ="${index}/${type}/${entry.build_number}"

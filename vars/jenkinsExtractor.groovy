@@ -31,9 +31,12 @@ def call(def jobNames, def numberOfHoursBack) {
 			// be extracted in the next step
 			if (build instanceof WorkflowRun) {
 				for (flowNode in RunExt.create(build).getStages()) {
+					 // SUCCESS and FAILURE Verdicts need to be in numeric values
+					def build_verdict = getBuildVerdictInteger(flowNode.getStatus())
+					
 					def stage_entry = new BuildDataEntry(job_name: "${sanitizedJobName}.${flowNode.getName().replaceAll("[^a-zA-Z0-9]", "_")}", 
 			           		   verdict: flowNode.getStatus(),
-			                           build_number: build.number,
+			                           build_number: build_verdict,
 				                   duration: flowNode.getDurationMillis(), 
 				                   timestamp: flowNode.getStartTimeMillis(),
 						   time_in_queue: 0) // Fixme!
@@ -52,4 +55,15 @@ def call(def jobNames, def numberOfHoursBack) {
         	}
 	}
 	return buildResults
+}
+
+def getBuildVerdictInteger(def verdictString){
+	def returnInteger = 0
+	if(verdictString == "SUCCESS"){
+	   returnInteger = 0
+	   }
+	   else if(verdictString == "FAILURE"){
+		   returnInteger = 1
+	   }
+	  return returnInteger
 }

@@ -14,7 +14,7 @@ import net.praqma.quticon.BuildDataEntry
 @NonCPS
 def call(def url, def index, def buildDataEntryList, def proxy_protocol=null, def proxy_host=null, def proxy_port=null) {
   mappings = """{ "mappings" : { "_default_" : { "properties" : { 
-                                                                  "verdict" : {"type": "string"},
+                                                                  "verdict" : {"type": "integer"},
                                                                   "job_name" : {"type": "string"},
                                                                   "build_number" : {"type": "integer"},
                                                                   "duration" : {"type": "integer"},

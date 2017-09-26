@@ -66,5 +66,6 @@ def getBuildVerdictInteger(def verdictString){
 	   else if(verdictString == "FAILURE"){
 		   returnInteger = 1
 	   }
+	echo "Returning ${returnInteger}"
 	  return returnInteger
 }

@@ -32,7 +32,7 @@ def call(def jobNames, def numberOfHoursBack) {
 			if (build instanceof WorkflowRun) {
 				for (flowNode in RunExt.create(build).getStages()) {
 					 // SUCCESS and FAILURE Verdicts need to be in numeric values
-					def buildVerdict = getBuildVerdictInteger(flowNode.getStatus())
+					String buildVerdict = getBuildVerdictInteger(flowNode.getStatus())
 					echo "${buildVerdict} succeeded."
 					def stage_entry = new BuildDataEntry(job_name: "${sanitizedJobName}.${flowNode.getName().replaceAll("[^a-zA-Z0-9]", "_")}", 
 			           		   verdict: flowNode.getStatus(),
@@ -57,14 +57,14 @@ def call(def jobNames, def numberOfHoursBack) {
 	return buildResults
 }
 
-def getBuildVerdictInteger(def verdictString){
+def getBuildVerdictInteger(String verdictString){
 	echo "${verdictString} into Integer"
-	def returnInteger = 0
+	String returnInteger = 0
 	if(verdictString == "SUCCESS"){
-	   returnInteger = 0
+	   returnInteger = "0"
 	   }
 	   else if(verdictString == "FAILURE"){
-		   returnInteger = 1
+		   returnInteger = "1"
 	   }
 	echo "Returning ${returnInteger}"
 	  return returnInteger

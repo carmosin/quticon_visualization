@@ -57,15 +57,15 @@ def call(def jobNames, def numberOfHoursBack) {
 	return buildResults
 }
 
-def getBuildVerdictInteger(def verdictString){
+def getBuildVerdictInteger(String verdictString){
 	echo "${verdictString} into Integer"
-	def returnInteger 
+	String returnInteger 
 	if (verdictString.equalsIgnoreCase("SUCCESS")) {
-	   returnInteger = 0
+	   returnInteger = "0"
 	}
 	else if (verdictString.equalsIgnoreCase("FAILURE")) {
-		   returnInteger = 1
+		   returnInteger = "1"
 	}
 	echo "Returning ${returnInteger}"
-	  return returnInteger
+	return returnInteger
 }
